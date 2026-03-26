@@ -1,5 +1,6 @@
 package com.example.pr27_03;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
@@ -24,11 +25,12 @@ public class GetAddressByGPS extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         try{
-            Document document = Jsoup.connect("https://geocode-maps.yandex.ru/1.x/?apikey=" + token + "&format=json&geocode" + coordinats + "&results=1")
+            Document document = (Document) Jsoup.connect("https://geocode-maps.yandex.ru/1.x/?apikey=" + token + "&format=json&geocode=" + coordinats + "&results=1")
                     .ignoreContentType(true)
                     .get();
+
             GsonBuilder builder = new GsonBuilder();
-            Response = builder.create().fromJson(document.text(), AddressResponse.class);
+            Response = builder.create().fromJson(document.getTextContent(), AddressResponse.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

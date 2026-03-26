@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
                 mapView.getMap().move(
                         new CameraPosition(
                                 new Point(location.getLatitude(), location.getLongitude()), 15, 0, 0));
-                mapView.getMap().getMapObjects.addPlacemark(
+                mapView.getMap().getMapObjects().clear();
+                mapView.getMap().getMapObjects().addPlacemark(
                         new Point(location.getLatitude(), location.getLongitude()),
                         ImageProvider.fromResource(MainActivity.this, R.drawable.location)
                 );
@@ -55,9 +56,10 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    LocationManager _LocationManager;
+
     TextView textAddress;
     MapView mapView;
+    android.location.LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mapView = findViewById(R.id.mapview);
         textAddress = findViewById(R.id.edittext);
-        _LocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        locationManager = (android.location.LocationManager) getSystemService(LOCATION_SERVICE);
     }
 
     @Override
@@ -80,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
                     new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, 1);
         }
 
-        _LocationManager.requestLocationUpdate(LocationManager.NETWORK_PROVIDER, 1000, 10, _locationListnaet);
-        _LocationManager.requestLocationUpdate(LocationManager.GPS_PROVIDER, 1000, 10, _locationListnaet);
+        locationManager.requestLocationUpdates(android.location.LocationManager.NETWORK_PROVIDER, 1000, 10, _locationListnaet);
+        locationManager.requestLocationUpdates(android.location.LocationManager.GPS_PROVIDER, 1000, 10, _locationListnaet);
         mapView.onStart();
     }
 
