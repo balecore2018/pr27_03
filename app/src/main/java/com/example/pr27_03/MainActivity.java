@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.gson.GsonBuilder;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.location.LocationManager;
@@ -22,6 +24,12 @@ import com.yandex.mapkit.map.CameraPosition;
 import com.yandex.mapkit.map.Map;
 import com.yandex.mapkit.mapview.MapView;
 import com.yandex.runtime.image.ImageProvider;
+
+import org.jsoup.Jsoup;
+import org.w3c.dom.Document;
+import org.w3c.dom.Text;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,6 +91,5 @@ public class MainActivity extends AppCompatActivity {
         mapView.onStop();
         MapKitFactory.getInstance().onStop();
     }
-
 }
 
