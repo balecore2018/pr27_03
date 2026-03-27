@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        MapKitFactory.getInstance().onStart();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
@@ -84,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
         locationManager.requestLocationUpdates(android.location.LocationManager.NETWORK_PROVIDER, 1000, 10, _locationListnaet);
         locationManager.requestLocationUpdates(android.location.LocationManager.GPS_PROVIDER, 1000, 10, _locationListnaet);
+
+        MapKitFactory.getInstance().onStart();
         mapView.onStart();
     }
 
